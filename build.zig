@@ -9,9 +9,11 @@ pub fn build(b: *std.Build) void {
     // Set the build mode
     const exe = b.addExecutable(.{
         .name = "zig_csfml",
-        .root_source_file = b.path("src/main.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/main.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
     });
     // Link libc
     exe.linkLibC();
